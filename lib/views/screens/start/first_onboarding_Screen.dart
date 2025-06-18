@@ -17,7 +17,8 @@ class Onboarding1Screen extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFFFFC107), // Golden yellow
+             // Color(0xFFFFC107), // Golden yellow
+              Color(0xFFE1DFD8),
               Color(0xE0FAC555), // Lighter yellow
             ],
           ),
@@ -92,18 +93,18 @@ class Onboarding1Screen extends StatelessWidget {
                       height: 60,
                       child: Container(
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [
-                              Color(0xFF5ECE63), // Green
-                              Color(0xE0F5DE75), // Light
-                            ],
-                          ),
+                          // gradient: const LinearGradient(
+                          //   colors: [
+                          //     Color(0xFF5BD360), // Green
+                          //     Color(0xE0F1EFE8), // Light
+                          //   ],
+                          //),
                           borderRadius: BorderRadius.circular(30),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
+                              color: Colors.green,
+                              blurRadius: 2,
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),

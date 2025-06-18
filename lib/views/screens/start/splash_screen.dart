@@ -69,8 +69,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Color(0xFFFFC107), // Golden yellow
-                Color(0xFFFFD54F), // Lighter yellow
+                Color(0xFFE1DFD7), // Golden yellow
+                Color(0xFFEAC960), // Lighter yellow
               ],
             ),
           ),
@@ -100,11 +100,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                 ),
                               ],
                             ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset(
-                                'assets/images/smart_chef_logo.png',
-                                fit: BoxFit.cover,
+                            child: ClipOval(
+                              child: Container(
+                                width: 270,
+                                height: 270,
+                                child: Image.asset(
+                                  'assets/images/smart_chef_logo.png',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
