@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Smart Chef',
-      initialRoute: AppRoutes.splash,
+      theme: ThemeData(primarySwatch: Colors.green),
+      initialRoute: AppRoutes.home,
       onGenerateRoute: AppRoutes.generateRoute,
     );
   }
