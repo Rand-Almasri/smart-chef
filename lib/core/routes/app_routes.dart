@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../views/start/first_onboarding_Screen.dart';
-import '../../views/start/splash_screen.dart';
+import '../../views/screens/start/first_onboarding_Screen.dart';
+import '../../views/screens/start/splash_screen.dart';
 
 class AppRoutes {
   // Route Names
