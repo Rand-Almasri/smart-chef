@@ -18,7 +18,7 @@ class Onboarding1Screen extends StatelessWidget {
             end: Alignment.bottomCenter,
             colors: [
               Color(0xFFFFC107), // Golden yellow
-              Color(0xFFFFD54F), // Lighter yellow
+              Color(0xE0FAC555), // Lighter yellow
             ],
           ),
         ),
