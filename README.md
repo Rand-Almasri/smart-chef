@@ -1,16 +1,49 @@
-# smart_chef
+# Smart Chef 🍽️
 
-A new Flutter project.
+## 🗓️ Project Duration
+June 16, 2025 – June 25, 2025
 
-## Getting Started
+## 📱 Project Overview
+**Smart Chef** is a mobile application designed to provide users with a simple, interactive experience in exploring and following cooking recipes. The app includes various categories such as desserts, breakfast meals, main dishes, beverages, and appetizers.
 
-This project is a starting point for a Flutter application.
+## 🔑 Key Features
+- Display main categories on the home screen.
+- Browse recipe cards with image, name, rating, and views.
+- View detailed recipe information including:
+  - Ingredients
+  - Helpful Tips
+  - Expected Results
+- Access step-by-step instructions after login.
+- Optional star-based rating system for recipes.
+- Submit a new recipe request from the sidebar.
+- Admin dashboard to manage:
+  - Categories
+  - Recipes
+  - Steps
+  - User data
 
-A few resources to get you started if this is your first Flutter project:
+## 👥 User Roles
+- Regular Users
+- Administrator (Admin)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📄 Required Screens
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| # | Screen | Description |
+|---|--------|-------------|
+| 1 | Splash Screen | Intro screen shown on app launch |
+| 2 | Home Page | Displays main categories and recipe cards |
+| 3 | Recipe Details | Includes tabs for Ingredients, Tips, Expected Results |
+| 4 | Login Page | Email and password login |
+| 5 | Registration Page | Register with name, email, password, age, gender |
+| 6 | Steps Page | Displays preparation steps and allows recipe rating |
+| 7 | Request New Recipe | Form to submit a new recipe request |
+| 8 | Admin Panel | Manage categories, recipes, steps, and users |
+
+
+## 📌 Notes
+- Authentication is required to view the recipe steps.
+- Submitting a new recipe request requires filling in the name, description, image, and category.
+- Admin panel access is restricted to authorized users.
+
+
+
