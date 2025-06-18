@@ -1,0 +1,39 @@
+# Dart
+.dart_tool/
+.packages
+.pub-cache/
+build/
+
+# Flutter
+.flutter-plugins
+.flutter-plugins-dependencies
+generated_plugin_registrant.dart
+
+# Android
+android/.gradle/
+android/local.properties
+.gradle/
+*.iml
+android/.idea/
+gradlew
+gradlew.bat
+
+# iOS
+ios/Flutter/Generated.xcconfig
+ios/.symlinks/
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/.generated/
+Podfile.lock
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Mac-specific
+.DS_Store
+
+# Others
+pubspec.lock
