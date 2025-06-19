@@ -195,10 +195,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                           child: Card(
-                            elevation: 3,
+                            elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
+                              side: const BorderSide(
+                                color: Color(0xFF8FB78F),
+                                width: 1,
+                              ),
                             ),
+
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
