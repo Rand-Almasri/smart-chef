@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      endDrawer: const CustomDrawer(), // ✅ Drawer على اليمين
+      endDrawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -66,12 +66,22 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: InputDecoration(
                 hintText: 'Search for recipes...',
                 prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide.none,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF8FB78F),
+                    width: 2,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF8FB78F),
+                    width: 2,
+                  ),
                 ),
                 filled: true,
-                fillColor: Colors.grey[200],
+                fillColor: Colors.white,
               ),
               onSubmitted: (query) {
                 if (query.isNotEmpty) {
@@ -80,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             const SizedBox(height: 20),
+
 
             // Categories
             Text(
@@ -92,7 +103,10 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
+                border: Border.all(
+                  color: const Color(0xFF8FB78F),
+                  width: 2,
+                ),
                 borderRadius: BorderRadius.circular(12),
               ),
               height: 100,
@@ -181,10 +195,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                           child: Card(
-                            elevation: 3,
+                            elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
+                              side: const BorderSide(
+                                color: Color(0xFF8FB78F),
+                                width: 1,
+                              ),
                             ),
+
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
