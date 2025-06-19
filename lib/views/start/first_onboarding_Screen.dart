@@ -17,7 +17,7 @@ class Onboarding1Screen extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-             // Color(0xFFFFC107), // Golden yellow
+              // Color(0xFFFFC107), // Golden yellow
               Color(0xFFE1DFD8),
               Color(0xE0FAC555), // Lighter yellow
             ],
@@ -91,55 +91,38 @@ class Onboarding1Screen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       height: 60,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          // gradient: const LinearGradient(
-                          //   colors: [
-                          //     Color(0xFF5BD360), // Green
-                          //     Color(0xE0F1EFE8), // Light
-                          //   ],
-                          //),
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.green,
-                              blurRadius: 2,
-                              offset: const Offset(0, 3),
+                      child: ElevatedButton(
+                        onPressed: () => _handleGetStarted(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          elevation: 5,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text(
+                              'Get Started',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.white,
+                              size: 18,
                             ),
                           ],
                         ),
-                        child: ElevatedButton(
-                          onPressed: () => _handleGetStarted(context),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Get Started',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
                     ),
+
 
                     const SizedBox(height: 20),
                   ],

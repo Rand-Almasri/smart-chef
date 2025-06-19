@@ -4,6 +4,8 @@ import 'package:smart_chef/model/category_model.dart';
 import 'package:smart_chef/core/routes/app_routes.dart';
 import 'package:smart_chef/model/recipe_model.dart';
 
+import '../../widgets/custom_drawer.dart';
+
 class HomeScreen extends StatefulWidget {
   final String username;
 
@@ -31,7 +33,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Smart Chef')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Smart Chef'),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+            ),
+          ),
+        ],
+      ),
+      endDrawer: const CustomDrawer(), // ✅ Drawer على اليمين
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -40,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
             // Top Welcome Message
             Text(
               'Hello, ${widget.username}',
-
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.w500,
               ),
@@ -62,7 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onSubmitted: (query) {
                 if (query.isNotEmpty) {
-                  // TODO: Implement search results screen navigation
                   print('Search submitted: $query');
                 }
               },
@@ -70,21 +82,18 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 20),
 
             // Categories
-            // Horizontal Scrollable Categories Row
             Text(
               'Categories',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.w500,
               ),
             ),
-
             const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade300),
                 borderRadius: BorderRadius.circular(12),
-                //color: Colors.white,
               ),
               height: 100,
               child: FutureBuilder<List<Category>>(
@@ -134,7 +143,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-
             const SizedBox(height: 20),
 
             // Recommendations
@@ -194,7 +202,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         recipe.name,
@@ -213,7 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             color: Colors.amber,
                                             size: 18,
                                           ),
-                                          Text('${recipe.rating.toStringAsFixed(1)} '),
+                                          Text(
+                                              '${recipe.rating.toStringAsFixed(1)} '),
                                         ],
                                       ),
                                     ],
@@ -232,7 +242,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-
     );
   }
 }
