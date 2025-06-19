@@ -4,6 +4,8 @@ import 'package:smart_chef/model/category_model.dart';
 import 'package:smart_chef/core/routes/app_routes.dart';
 import 'package:smart_chef/model/recipe_model.dart';
 
+import '../../widgets/custom_drawer.dart';
+
 class HomeScreen extends StatefulWidget {
   final String username;
 
@@ -31,63 +33,53 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Smart Chef'),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Stack(
-        children: [
-          // Gradient Background
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFFE1DFD8),
-                  Color(0xFF5BD360),
-                ],
-              ),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
             ),
           ),
+        ],
+      ),
+      endDrawer: const CustomDrawer(), // ✅ Drawer على اليمين
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Top Welcome Message
+            Text(
+              'Hello, ${widget.username}',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 20),
 
-          // Main Content
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Hello, ${widget.username}',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Search Bar
-                  TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      hintText: 'Search for recipes...',
-                      prefixIcon: const Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                    ),
-                    onSubmitted: (query) {
-                      if (query.isNotEmpty) {
-                        print('Search submitted: $query');
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 20),
+            // Search Bar
+            TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Search for recipes...',
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
+              ),
+              onSubmitted: (query) {
+                if (query.isNotEmpty) {
+                  print('Search submitted: $query');
+                }
+              },
+            ),
+            const SizedBox(height: 20),
 
                   // Categories
                   Text(
@@ -249,10 +241,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-          ),
-        ],
-      ),
+
+
+
     );
   }
-
 }
