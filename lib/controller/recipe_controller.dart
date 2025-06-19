@@ -67,16 +67,48 @@ class RecipeController {
 
   Future<List<Recipe>> fetchRandomRecipes(int count) async {
     List<Recipe> randomRecipes = [];
-    for (int i = 0; i < count; i++) {
-      final response = await http.get(Uri.parse('$_baseUrl/random.php'));
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
-        final List<dynamic> mealsJson = data['meals'] ?? [];
-        if (mealsJson.isNotEmpty) {
-          randomRecipes.add(Recipe.fromJson(mealsJson.first));
+    int fetchedCount = 0;
+    int maxRetries = 3;
+
+    while (fetchedCount < count) {
+      int retries = 0;
+      bool success = false;
+      while (retries < maxRetries && !success) {
+        try {
+          final response = await http.get(Uri.parse('$_baseUrl/random.php'));
+          if (response.statusCode == 200) {
+            final Map<String, dynamic> data = json.decode(response.body);
+            final List<dynamic> mealsJson = data['meals'] ?? [];
+            if (mealsJson.isNotEmpty) {
+              randomRecipes.add(Recipe.fromJson(mealsJson.first));
+              fetchedCount++;
+              success = true;
+            } else {
+              print(
+                'API returned empty meals list for random recipe. Retrying...',
+              );
+            }
+          } else {
+            print(
+              'Failed to load random recipe (status: ${response.statusCode}). Retrying...',
+            );
+          }
+        } catch (e) {
+          print('Error fetching random recipe: $e. Retrying...');
         }
-      } else {
-        print('Failed to load random recipe: ${response.statusCode}');
+        if (!success) {
+          retries++;
+          await Future.delayed(
+            const Duration(seconds: 1),
+          ); // Wait a bit before retrying
+        }
+      }
+      if (!success) {
+        print(
+          'Failed to fetch a random recipe after $maxRetries retries. Continuing with available recipes.',
+        );
+        // If we can't fetch enough recipes, break to avoid infinite loop
+        break;
       }
     }
     return randomRecipes;

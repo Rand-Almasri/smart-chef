@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Smart Chef')),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
             // Top Welcome Message
             Text(
               'Hello, ${widget.username}',
-              style: Theme.of(context).textTheme.headlineMedium,
+
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const SizedBox(height: 20),
 
@@ -66,14 +69,24 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 20),
 
+            // Categories
             // Horizontal Scrollable Categories Row
             Text(
               'Categories',
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
             ),
+
             const SizedBox(height: 10),
-            SizedBox(
-              height: 100, // Increased height to accommodate image and text
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(12),
+                //color: Colors.white,
+              ),
+              height: 100,
               child: FutureBuilder<List<Category>>(
                 future: _categoriesFuture,
                 builder: (context, snapshot) {
@@ -90,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         final category = snapshot.data![index];
                         return Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
+                          padding: const EdgeInsets.only(right: 15.0),
                           child: GestureDetector(
                             onTap: () {
                               Navigator.pushNamed(
@@ -102,12 +115,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               children: [
                                 CircleAvatar(
-                                  radius: 30,
+                                  radius: 25,
                                   backgroundImage: NetworkImage(category.image),
                                   backgroundColor: Colors.transparent,
                                 ),
                                 const SizedBox(height: 5),
-                                Text(category.name),
+                                Text(
+                                  category.name,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
                               ],
                             ),
                           ),
@@ -118,16 +134,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
+
             const SizedBox(height: 20),
 
-            // Recommendation Section
+            // Recommendations
             Text(
               'Recommended for You',
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const SizedBox(height: 10),
-            SizedBox(
-              height: 250, // Adjust height as needed
+            Expanded(
               child: FutureBuilder<List<Recipe>>(
                 future: _recommendedRecipesFuture,
                 builder: (context, snapshot) {
@@ -140,9 +158,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Text('No recommended recipes found.'),
                     );
                   } else {
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
+                    return ListView.separated(
                       itemCount: snapshot.data!.length,
+                      separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
                       itemBuilder: (context, index) {
                         final recipe = snapshot.data![index];
                         return GestureDetector(
@@ -158,56 +177,49 @@ class _HomeScreenState extends State<HomeScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
-                            margin: const EdgeInsets.only(right: 15.0),
-                            child: SizedBox(
-                              width: 180,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(10.0),
-                                    ),
-                                    child: Image.network(
-                                      recipe.image,
-                                      height: 120,
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(10.0),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          recipe.name,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
+                                  child: Image.network(
+                                    recipe.image,
+                                    height: 150,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        recipe.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                            size: 18,
                                           ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.star,
-                                              color: Colors.amber,
-                                              size: 18,
-                                            ),
-                                            Text(
-                                              '${recipe.rating.toStringAsFixed(1)} ⭐',
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          Text('${recipe.rating.toStringAsFixed(1)} '),
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         );
@@ -220,6 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+
     );
   }
 }

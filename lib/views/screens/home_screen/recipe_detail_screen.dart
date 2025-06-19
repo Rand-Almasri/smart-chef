@@ -48,7 +48,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
                       recipe.image,
-                      height: 200,
+                      height: 400,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -63,42 +63,70 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                     children: [
                       const Icon(Icons.star, color: Colors.amber, size: 24),
                       Text(
-                        '${recipe.rating.toStringAsFixed(1)} ⭐',
+                        '${recipe.rating.toStringAsFixed(1)}',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _showInstructions = !_showInstructions;
-                      });
-                    },
-                    child: Text(
-                      _showInstructions ? 'Hide Recipe' : 'View Recipe',
+                   SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _showInstructions = !_showInstructions;
+                        });
+                      },
+                      child: Text(
+                        _showInstructions ? 'Hide Recipe' : 'View Recipe',
+                        style: const TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                   ),
+
+                  const SizedBox(height: 20),
+
+                  // Instructions section
                   if (_showInstructions)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Instructions:',
-                            style: Theme.of(context).textTheme.titleLarge,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             recipe.instructions.isNotEmpty
                                 ? recipe.instructions
                                 : 'No instructions available.',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ],
                       ),
                     ),
+
+                  const SizedBox(height: 20),
                 ],
               );
             }
